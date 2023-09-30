@@ -1,2 +1,2 @@
-# CBDetect.jl
-Detect checkerboards in Julia
+# GridDetector.jl
+Detect grids in Julia
