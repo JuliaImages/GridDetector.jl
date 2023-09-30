@@ -1,0 +1,7 @@
+name = "GridDetector"
+uuid = "75c2d37c-541b-4fe4-8435-1b4a52ab0cde"
+authors = "Ashwani Rathee"
+version = "0.0.1"
+
+[deps]
+PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
