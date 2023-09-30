@@ -20,7 +20,7 @@ save("results.png", img)
 ##### Results:
 | Input image     | Output Image |
 | ----------- | ----------- |
-| ![](../assets/test.jpg) | ![](../assets/results.png) |
+| ![](assets/test.jpg) | ![](assets/results.png) |
 
 ```@autodocs
 Modules = [GridDetector]

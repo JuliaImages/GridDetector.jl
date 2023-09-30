@@ -15,4 +15,4 @@ save("results.png", img)
 ##### Results:
 | Input image     | Output Image |
 | ----------- | ----------- |
-| ![](assets/test.jpg) | ![](assets/results.png) |
+| ![](docs/src/assets/test.jpg) | ![](docs/src/assets/results.png) |
