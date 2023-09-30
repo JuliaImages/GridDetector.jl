@@ -83,8 +83,8 @@ function kxkneighboardhood(
     board = Float32.(chessboard)
     for (idx, i) in enumerate(refined1)
         x, y = i[1], i[2]
-        std1 = !isapprox(std(p1), std(p2); atol = stdatol)
-        std2 = !isapprox(std(p3), std(p4); atol = stdatol)
+        # std1 = !isapprox(std(p1), std(p2); atol = stdatol)
+        # std2 = !isapprox(std(p3), std(p4); atol = stdatol)
         # cor1 = 10^((cor(vec(p1), vec(reverse(p2))) / 0.8) -1) > cortol
         # cor2 = 10^((cor(vec(p3), vec(reverse(p4))) / 0.8) -1) > cortol
         # if  std1 || std2 || !cor1 || !cor2
@@ -92,7 +92,7 @@ function kxkneighboardhood(
         # end
         imgtest = board[x-n:x+n, y-n:y+n]
         res = cor(vec(imgtest), vec(reverse(imgtest)))
-        if std1 || std2 || res < 0.7
+        if res < 0.7
             continue
         end
         reut[idx] = true
@@ -252,7 +252,7 @@ processes the checkerboard
 function process_image(chessboard)
     # we need a algorithm to check if there is a checkerboard or not in image
     # still need to study how filters from ImageFiltering.jl can improve results
-    imagecorners = imcorner(chessboard, Percentile(99); method = Images.harris)
+    imagecorners = imcorner(chessboard, Percentile(99); method = harris)
     # imagecorners = fastcorners(chessboard, 11, 0.20) # still gotta check if this is worth it 
     imagecorners = clearborder(imagecorners, 35) # 35 is the boundary width we change
     results =
