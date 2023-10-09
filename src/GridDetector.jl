@@ -1,11 +1,12 @@
 module GridDetector
 
-# using
+using Reexport
 using ImageCorners
 using ImageMorphology
 using ImageFiltering
 using ImageDraw
 using Statistics
+@reexport using Colors 
 
 include("checkerboard.jl")
 include("precompile.jl")
