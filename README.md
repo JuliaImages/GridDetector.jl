@@ -3,10 +3,10 @@ Detect grids in Julia
 
 #### Checkerboard Detection using GridDetector.jl
 ```
-using Images
+using FileIO
 using GridDetector
 
-img = Gray.(load("assets/test.jpg"))
+img = Gray.(load("test.jpg"))
 res = process_image(img)
 draw_rect(img, res,  Gray(1))
 save("results.png", img)
