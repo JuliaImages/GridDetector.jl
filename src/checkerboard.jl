@@ -245,22 +245,38 @@ function checkboundaries(checkerboard, cords; pixels = [11, 23, 35])
     refined1 = filter(x -> x !== nothing, refined)
 end
 
+function bool_ci(imagecorners)
+    x, y = size(imagecorners)
+    res = Vector{CartesianIndex}([])
+    for i in 1:x
+        for j in 1:y
+            if (imagecorners[i,j] != 0)
+                push!(res, CartesianIndex(i,j))
+            end
+        end
+    end
+    res
+end
+
 """
 
 processes the checkerboard
 """
-function process_image(chessboard)
+function find_checkerboard(image::Array{Gray{N0f8},2}) :: Vector{CartesianIndex}
     # we need a algorithm to check if there is a checkerboard or not in image
     # still need to study how filters from ImageFiltering.jl can improve results
-    imagecorners = imcorner(chessboard, Percentile(99); method = harris)
-    # imagecorners = fastcorners(chessboard, 11, 0.20) # still gotta check if this is worth it 
-    imagecorners = clearborder(imagecorners, 35) # 35 is the boundary width we change
-    results =
-        map(x -> imagecorners[x] == true ? x : nothing, CartesianIndices(imagecorners))
-    results = filter(x -> x !== nothing, results)
-    correlationcheck = kxkneighboardhood(chessboard, results;)
-    bounds = checkboundaries(chessboard, correlationcheck; pixels = [11, 23, 35])
+    imagecorners = imcorner(image, ImageCorners.Percentile(99.5); method = harris) # 36.534 ms
+    imagecorners = clearborder(imagecorners, 35) # 35 is the boundary width we change, 9 ms
+    
+    results = bool_ci(imagecorners)
+
+    correlationcheck = kxkneighboardhood(image, results;)
+
+    bounds = checkboundaries(image, correlationcheck; pixels = [11, 23, 35])
     # also we need algorithm for checking if we have a board now, with connected components still
     # also we need algorithm for checking if we have outliers and remove them  if they exist
     finalcorners = nonmaxsuppresion(bounds) # return checkboard points
 end
+
+# @btime find_checkerboard(image)  177.638 ms (409704 allocations: 103.93 MiB) # with types
+#  129.333 ms (108485 allocations: 84.83 MiB) # with types bool_ci(imagecorners) 

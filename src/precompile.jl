@@ -3,10 +3,10 @@ using Colors
 
 @setup_workload begin
     
-    img = rand(Gray, 500,500)
+    img = rand(Gray{N0f8}, 500,500)
     
     @compile_workload begin
-        res = process_image(img)
+        res = find_checkerboard(img)
         draw_rect(img, res,  Gray(1)) 
     end
 end
