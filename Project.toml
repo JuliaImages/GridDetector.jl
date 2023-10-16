@@ -1,7 +1,7 @@
 name = "GridDetector"
 uuid = "75c2d37c-541b-4fe4-8435-1b4a52ab0cde"
 authors = "Ashwani Rathee"
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 ColorVectorSpace = "c3611d14-8923-5661-9e6a-0046d554d3a4"
